@@ -1,5 +1,10 @@
 import { Notice, Platform, TFolder, WorkspaceLeaf } from "obsidian";
-import { HISTORY_VIEW_CONFIG, SOURCE_CONTROL_VIEW_CONFIG } from "./constants";
+import {
+    FILE_HISTORY_VIEW_CONFIG,
+    HISTORY_VIEW_CONFIG,
+    SOURCE_CONTROL_VIEW_CONFIG,
+} from "./constants";
+import FileHistoryView from "./ui/history/fileHistoryView";
 import { SimpleGit } from "./gitManager/simpleGit";
 import ObsidianGit from "./main";
 import { openHistoryInGitHub, openLineInGitHub } from "./openInGitHub";
@@ -77,6 +82,27 @@ export function addCommmands(plugin: ObsidianGit) {
             // Is not needed for the first open, but allows to refresh the view
             // per hotkey even if already opened
             app.workspace.trigger("obsidian-git:refresh");
+        },
+    });
+
+    plugin.addCommand({
+        id: "open-file-history-view",
+        name: "Open file history",
+        checkCallback: (checking) => {
+            const file = app.workspace.getActiveFile();
+            if (checking) {
+                return file !== null;
+            }
+            void (async () => {
+                const leaf = app.workspace.getLeaf("tab");
+                const fileHistoryView = new FileHistoryView(
+                    leaf,
+                    plugin,
+                    file!.path
+                );
+                await leaf.open(fileHistoryView);
+                await app.workspace.revealLeaf(leaf);
+            })();
         },
     });
 

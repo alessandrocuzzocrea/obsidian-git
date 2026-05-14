@@ -25,6 +25,7 @@ import {
     CONFLICT_OUTPUT_FILE,
     DEFAULT_SETTINGS,
     DIFF_VIEW_CONFIG,
+    FILE_HISTORY_VIEW_CONFIG,
     HISTORY_VIEW_CONFIG,
     SOURCE_CONTROL_VIEW_CONFIG,
     SPLIT_DIFF_VIEW_CONFIG,
@@ -48,6 +49,7 @@ import {
 } from "./types";
 import DiffView from "./ui/diff/diffView";
 import SplitDiffView from "./ui/diff/splitDiffView";
+import FileHistoryView from "./ui/history/fileHistoryView";
 import HistoryView from "./ui/history/historyView";
 import { BranchModal } from "./ui/modals/branchModal";
 import { GeneralModal } from "./ui/modals/generalModal";
@@ -280,6 +282,14 @@ export default class ObsidianGit extends Plugin {
 
         this.registerView(HISTORY_VIEW_CONFIG.type, (leaf) => {
             return new HistoryView(leaf, this);
+        });
+
+        this.registerView(FILE_HISTORY_VIEW_CONFIG.type, (leaf) => {
+            return new FileHistoryView(
+                leaf,
+                this,
+                ""
+            );
         });
 
         this.registerView(DIFF_VIEW_CONFIG.type, (leaf) => {
