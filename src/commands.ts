@@ -4,7 +4,6 @@ import {
     HISTORY_VIEW_CONFIG,
     SOURCE_CONTROL_VIEW_CONFIG,
 } from "./constants";
-import FileHistoryView from "./ui/history/fileHistoryView";
 import { SimpleGit } from "./gitManager/simpleGit";
 import ObsidianGit from "./main";
 import { openHistoryInGitHub, openLineInGitHub } from "./openInGitHub";
@@ -94,13 +93,25 @@ export function addCommmands(plugin: ObsidianGit) {
                 return file !== null;
             }
             void (async () => {
-                const leaf = app.workspace.getLeaf("tab");
-                const fileHistoryView = new FileHistoryView(
-                    leaf,
-                    plugin,
-                    file!.path
+                const leafs = app.workspace.getLeavesOfType(
+                    FILE_HISTORY_VIEW_CONFIG.type
                 );
-                await leaf.open(fileHistoryView);
+                let leaf: WorkspaceLeaf;
+                if (leafs.length === 0) {
+                    leaf =
+                        app.workspace.getRightLeaf(false) ??
+                        app.workspace.getLeaf();
+                    await leaf.setViewState({
+                        type: FILE_HISTORY_VIEW_CONFIG.type,
+                        state: { filePath: file!.path },
+                    });
+                } else {
+                    leaf = leafs.first()!;
+                    await leaf.setViewState({
+                        type: FILE_HISTORY_VIEW_CONFIG.type,
+                        state: { filePath: file!.path },
+                    });
+                }
                 await app.workspace.revealLeaf(leaf);
             })();
         },
