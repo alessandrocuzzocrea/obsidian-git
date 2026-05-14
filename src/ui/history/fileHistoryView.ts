@@ -31,7 +31,10 @@ export default class FileHistoryView extends ItemView implements HoverParent {
         return FILE_HISTORY_VIEW_CONFIG.icon;
     }
 
-    async setState(state: { filePath?: string }, result: unknown): Promise<void> {
+    async setState(
+        state: { filePath?: string },
+        result: unknown
+    ): Promise<void> {
         if (state.filePath) {
             this.filePath = state.filePath;
             this.reload();
