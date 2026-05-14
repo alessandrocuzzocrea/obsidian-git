@@ -139,7 +139,12 @@
         {#if logs}
             <div class="tree-item nav-folder mod-root">
                 {#each logs as log}
-                    <LogComponent view={view as unknown as HistoryView} {showTree} {log} {plugin} />
+                    <LogComponent
+                        view={view as unknown as HistoryView}
+                        {showTree}
+                        {log}
+                        {plugin}
+                    />
                 {/each}
             </div>
         {/if}
