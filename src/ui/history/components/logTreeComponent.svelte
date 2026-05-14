@@ -1,16 +1,16 @@
 <!-- tslint:disable ts(2345)  -->
 <script lang="ts">
-    import type { ItemView } from "obsidian";
     import LogTreeComponent from "./logTreeComponent.svelte";
     import type ObsidianGit from "src/main";
     import type { HistoryRootTreeItem, TreeItem } from "src/types";
     import { slide } from "svelte/transition";
+    import type HistoryView from "../historyView";
     import LogFileComponent from "./logFileComponent.svelte";
 
     interface Props {
         hierarchy: HistoryRootTreeItem;
         plugin: ObsidianGit;
-        view: ItemView & { plugin: ObsidianGit };
+        view: HistoryView;
         topLevel?: boolean;
         closed: Record<string, boolean>;
     }
