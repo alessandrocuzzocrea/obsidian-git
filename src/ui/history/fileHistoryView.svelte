@@ -46,9 +46,7 @@
                 appendLogs().catch(console.error);
             }
         });
-        const sentinel = activeDocument.querySelector(
-            "#file-history-sentinel"
-        );
+        const sentinel = activeDocument.querySelector("#file-history-sentinel");
         if (sentinel) {
             observer.observe(sentinel);
         }
@@ -129,7 +127,10 @@
         </div>
     </div>
 
-    <div class="nav-header-title" style="padding: 4px 10px; font-size: var(--font-ui-small); color: var(--text-muted); word-break: break-all;">
+    <div
+        class="nav-header-title"
+        style="padding: 4px 10px; font-size: var(--font-ui-small); color: var(--text-muted); word-break: break-all;"
+    >
         {filePath}
     </div>
 

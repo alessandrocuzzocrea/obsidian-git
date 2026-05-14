@@ -285,11 +285,7 @@ export default class ObsidianGit extends Plugin {
         });
 
         this.registerView(FILE_HISTORY_VIEW_CONFIG.type, (leaf) => {
-            return new FileHistoryView(
-                leaf,
-                this,
-                ""
-            );
+            return new FileHistoryView(leaf, this, "");
         });
 
         this.registerView(DIFF_VIEW_CONFIG.type, (leaf) => {
