@@ -6,6 +6,7 @@
     import { onMount } from "svelte";
     import LogComponent from "./components/logComponent.svelte";
     import type FileHistoryView from "./fileHistoryView";
+    import type HistoryView from "./historyView";
 
     interface Props {
         plugin: ObsidianGit;
@@ -138,7 +139,7 @@
         {#if logs}
             <div class="tree-item nav-folder mod-root">
                 {#each logs as log}
-                    <LogComponent {view} {showTree} {log} {plugin} />
+                    <LogComponent view={view as unknown as HistoryView} {showTree} {log} {plugin} />
                 {/each}
             </div>
         {/if}
