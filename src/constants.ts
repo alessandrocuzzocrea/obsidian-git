@@ -81,6 +81,12 @@ export const HISTORY_VIEW_CONFIG = {
     icon: "history",
 };
 
+export const FILE_HISTORY_VIEW_CONFIG = {
+    type: "git-file-history-view",
+    name: "File History",
+    icon: "history",
+};
+
 export const SPLIT_DIFF_VIEW_CONFIG = {
     type: "split-diff-view",
     name: "Diff view",
