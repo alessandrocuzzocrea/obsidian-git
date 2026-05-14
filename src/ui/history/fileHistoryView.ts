@@ -1,4 +1,9 @@
-import type { HoverParent, HoverPopover, WorkspaceLeaf } from "obsidian";
+import type {
+    HoverParent,
+    HoverPopover,
+    ViewStateResult,
+    WorkspaceLeaf,
+} from "obsidian";
 import { ItemView } from "obsidian";
 import { FILE_HISTORY_VIEW_CONFIG } from "src/constants";
 import type ObsidianGit from "src/main";
@@ -33,7 +38,7 @@ export default class FileHistoryView extends ItemView implements HoverParent {
 
     async setState(
         state: { filePath?: string },
-        result: unknown
+        result: ViewStateResult
     ): Promise<void> {
         if (state.filePath) {
             this.filePath = state.filePath;
