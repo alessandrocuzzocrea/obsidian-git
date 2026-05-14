@@ -1,15 +1,14 @@
 <script lang="ts">
-    import { moment } from "obsidian";
+    import { type ItemView, moment } from "obsidian";
     import type ObsidianGit from "src/main";
     import type { LogEntry } from "src/types";
     import { slide } from "svelte/transition";
-    import type HistoryView from "../historyView";
     import LogFileComponent from "./logFileComponent.svelte";
     import LogTreeComponent from "./logTreeComponent.svelte";
 
     interface Props {
         log: LogEntry;
-        view: HistoryView;
+        view: ItemView & { plugin: ObsidianGit };
         showTree: boolean;
         plugin: ObsidianGit;
     }

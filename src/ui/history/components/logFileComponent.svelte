@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { setIcon, TFile } from "obsidian";
+    import { type ItemView, setIcon, TFile } from "obsidian";
+    import type ObsidianGit from "src/main";
     import type { DiffFile } from "src/types";
     import {
         fileIsBinary,
@@ -8,11 +9,10 @@
         getNewLeaf,
         mayTriggerFileMenu,
     } from "src/utils";
-    import type HistoryView from "../historyView";
 
     interface Props {
         diff: DiffFile;
-        view: HistoryView;
+        view: ItemView & { plugin: ObsidianGit };
     }
 
     let { diff, view }: Props = $props();
